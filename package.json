@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run back\" \"npm run front\"",
+    "back": "npm --prefix back run dev",
+    "front": "npm --prefix front start",
+    "test": "concurrently \"npm run test-front\" \"npm run test-back\"",
+    "test-front": "npm --prefix front test",
+    "test-back": "npm --prefix back test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
