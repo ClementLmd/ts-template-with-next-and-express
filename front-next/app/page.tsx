@@ -1,11 +1,9 @@
-import FirstComponent from '../components/FirstComponent';
-import HeaderLayout from '../components/HeaderLayout';
+import FetchHelloWorld from '../components/FetchHelloWorld';
 
 export default function Home() {
   return (
-    <>
-      <HeaderLayout />
-      <FirstComponent></FirstComponent>
-    </>
+    <div>
+      <FetchHelloWorld />
+    </div>
   );
 }
