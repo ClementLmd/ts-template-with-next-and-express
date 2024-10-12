@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"pnpm run back\" \"pnpm run front-next\"",
+    "start": "concurrently \"pnpm run back\" \"pnpm run front\"",
     "back": "pnpm --prefix back run nodemon",
-    "front-next": "pnpm --prefix front-next dev",
+    "front": "pnpm --prefix front dev",
     "test": "concurrently \"pnpm run test-front\" \"pnpm run test-back\"",
     "test-front": "pnpm --prefix front test",
     "test-back": "pnpm --prefix back test",
