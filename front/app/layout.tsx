@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import styles from '../styles/globals.css';
+import '../styles/globals.css';
 import HeaderLayout from '../components/HeaderLayout';
 import FooterLayout from '../components/FooterLayout';
 
@@ -18,9 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={styles.layout}>
+      <body>
         <HeaderLayout />
-        {children}
+        <main>{children}</main>
         <FooterLayout />
       </body>
     </html>

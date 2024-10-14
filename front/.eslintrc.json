@@ -23,5 +23,9 @@
     "react": {
       "version": "detect"
     }
+  },
+  "rules": {
+    "no-unused-vars": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

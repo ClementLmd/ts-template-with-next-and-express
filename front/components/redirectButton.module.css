@@ -1,11 +1,5 @@
-.body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .button {
-  background-image: linear-gradient(
+  background: linear-gradient(
     to right top,
     #d16ba5,
     #c777b9,
@@ -20,8 +14,12 @@
     #291e24,
     #000000
   );
-  color: whitesmoke;
   border-radius: 0.5rem;
   margin: 1rem;
   padding: 0.5rem;
+}
+
+.link {
+  color: whitesmoke;
+  text-decoration: none;
 }

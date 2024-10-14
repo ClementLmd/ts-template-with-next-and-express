@@ -1,4 +1,4 @@
-import styles from '../styles/footerLayout.module.css';
+import styles from './footerLayout.module.css';
 
 export default function FooterLayout() {
   return (

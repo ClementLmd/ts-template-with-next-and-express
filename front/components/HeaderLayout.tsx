@@ -1,9 +1,12 @@
-import styles from '../styles/headerLayout.module.css';
+import Link from 'next/link';
+import styles from './headerLayout.module.css';
 
 export default function HeaderLayout() {
   return (
     <div className={styles.body}>
-      <div className={styles.title}>Header</div>
+      <Link className={styles.title} href="/">
+        Header
+      </Link>
     </div>
   );
 }

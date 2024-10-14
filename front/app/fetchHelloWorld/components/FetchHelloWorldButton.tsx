@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import styles from '../styles/buttonFetchHelloWorld.module.css';
+import styles from './fetchHelloWorldButton.module.css';
 
-export default function ButtonFetchHelloWorld() {
+export default function FetchHelloWorldButton() {
   const [displayHelloWorld, setDisplayHelloWorld] = useState(false);
   const handleClick = () => {
     fetch('http://localhost:3001')
