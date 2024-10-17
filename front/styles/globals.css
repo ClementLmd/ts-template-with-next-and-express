@@ -16,6 +16,17 @@ body {
   justify-content: space-between;
 }
 
+.layout {
+  flex: 1;
+  display: flex;
+  background-color: #fafafa;
+}
+
 main {
   flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

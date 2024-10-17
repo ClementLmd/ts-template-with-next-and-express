@@ -1,0 +1,47 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: rgba(112, 45, 159, 0.283);
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+.menuItem {
+  padding: 1rem 2rem;
+  margin:0.1rem;
+  cursor: pointer;
+  color: ghostwhite;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.menuItem:hover {
+  background-color: rgba(9, 9, 121, 0.15); 
+  border-radius: 10px;
+}
+
+.active {
+  background-color: rgba(9, 9, 121, 0.358); 
+  border-radius: 10px;
+}
+
+.content {
+  text-align: center;
+  margin-left: 2rem;
+  flex-grow: 1;
+}
+
+.title {
+  line-height: 1.15;
+  font-size: 4rem;
+}
