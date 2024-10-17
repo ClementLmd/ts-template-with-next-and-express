@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 import HeaderLayout from '../components/HeaderLayout';
 import FooterLayout from '../components/FooterLayout';
+import { ThemeProvider } from '../components/ThemeProviderShadCn';
 
 export const metadata: Metadata = {
   title: 'Template Layout',
@@ -19,9 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <HeaderLayout />
-        <main>{children}</main>
-        <FooterLayout />
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange>
+          <HeaderLayout />
+          <main>{children}</main>
+          <FooterLayout />
+        </ThemeProvider>
       </body>
     </html>
   );
