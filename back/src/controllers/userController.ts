@@ -1,18 +1,20 @@
 import { Request, Response } from 'express';
 import { createUser } from '../use-cases/createUser';
 import { getAllUsers, getUserById } from '../use-cases/getUser';
+import { checkBody } from '../utils/checkBody';
 
 export const createUserController = async (req: Request, res: Response) => {
-  console.log('req.body', req.body);
   try {
+    if (!checkBody(req.body, ['firstname', 'lastname']))
+      return res.status(400).json({ error: 'Missing or empty fields' });
     const userData = {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
     };
     const newUser = await createUser(userData);
-    res.status(200).json(newUser);
+    return res.status(201).json(newUser);
   } catch {
-    res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 

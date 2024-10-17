@@ -1,8 +1,26 @@
 import mongoose from 'mongoose';
 
-const connectionString = process.env.CONNECTION_STRING ?? '';
+let databaseEnvironment: 'test' | 'production';
+const defineConnectionString = () => {
+  if (process.env.NODE_ENV === 'test') {
+    databaseEnvironment = 'test';
+    return process.env.CONNECTION_STRING_TEST;
+  }
+  databaseEnvironment = 'production';
+  return process.env.CONNECTION_STRING;
+};
 
-mongoose
-  .connect(connectionString, { connectTimeoutMS: 2000 })
-  .then(() => console.log('Database connected'))
-  .catch((error) => console.error(error));
+const connectionString = defineConnectionString();
+
+if (!connectionString) {
+  throw new Error('MongoDB connection string is undefined. Check your environment variables.');
+}
+
+export const connectToDatabase = () => {
+  mongoose
+    .connect(connectionString, { connectTimeoutMS: 2000 })
+    .then(() => console.log(`Database connected - ${databaseEnvironment}`))
+    .catch((error) => console.error(error));
+};
+
+connectToDatabase();

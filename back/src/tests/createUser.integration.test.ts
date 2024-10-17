@@ -1,22 +1,25 @@
 import { UserModel } from '../models/users';
+import request from 'supertest';
+import app from '../app';
 import mongoose from 'mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
+import { connectToDatabase } from '../models/connection';
 
 describe('UserModel test', () => {
-  let mongoServer: MongoMemoryServer;
-
   beforeAll(async () => {
-    mongoServer = await MongoMemoryServer.create();
-    const uri = mongoServer.getUri();
-    await mongoose.connect(uri);
+    await connectToDatabase();
+    await mongoose.connection.db?.dropDatabase();
+  });
+
+  afterEach(async () => {
+    await mongoose.connection.db?.dropDatabase();
   });
 
   afterAll(async () => {
     await mongoose.disconnect();
-    await mongoServer.stop();
   });
+
   it('should create and save a new user', async () => {
-    const user = { firstname: 'Jane', lastname: 'Doe' };
+    const user = { firstname: 'Joe', lastname: 'Doe' };
     const newUser = new UserModel(user);
     const savedUser = await newUser.save();
 
@@ -24,5 +27,18 @@ describe('UserModel test', () => {
     expect(savedUser.lastname).toBe(user.lastname);
   });
 
-  it('with usersRoute', () => {});
+  it('should send 201 ', async () => {
+    const user = { firstname: 'John', lastname: 'Doe' };
+    const response = await request(app).post('/users').send(user);
+
+    expect(response.status).toBe(201);
+    expect(response.body.firstname).toBe(user.firstname);
+    expect(response.body.lastname).toBe(user.lastname);
+  });
+  it('should not create a user with missing fields', async () => {
+    const user = { firstname: '' };
+    const response = await request(app).post('/users').send(user);
+
+    expect(response.status).toBe(400);
+  });
 });
