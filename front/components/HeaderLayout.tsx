@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './headerLayout.module.css';
+import { ModeToggle } from './ModeToggle';
 
 export default function HeaderLayout() {
   return (
@@ -7,6 +8,7 @@ export default function HeaderLayout() {
       <Link className={styles.title} href="/">
         Header
       </Link>
+      <ModeToggle />
     </div>
   );
 }
