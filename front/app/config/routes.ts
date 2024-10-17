@@ -10,4 +10,10 @@ export const routes = {
 
 type RoutesType = typeof routes;
 
-export type RoutePaths = RoutesType[keyof RoutesType];
+type FlattenRoutes<T> = T extends string
+  ? T
+  : {
+      [K in keyof T]: FlattenRoutes<T[K]>;
+    }[keyof T];
+
+export type RoutePaths = FlattenRoutes<RoutesType>;
