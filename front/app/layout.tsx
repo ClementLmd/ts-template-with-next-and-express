@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 import HeaderLayout from '../components/HeaderLayout';
 import FooterLayout from '../components/FooterLayout';
-import MenuBar from '../components/Menubar';
 
 export const metadata: Metadata = {
   title: 'Template Layout',
@@ -21,12 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <HeaderLayout />
-        <div className="layout">
-          <MenuBar />
-          <main>
-            {children}
-          </main>
-        </div>
+        <div className="container">{children}</div>
         <FooterLayout />
       </body>
     </html>

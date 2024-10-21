@@ -6,15 +6,31 @@
     rgba(111, 45, 159, 1) 100%
   );
   width: 100%;
-  height: 4rem;
+  height: 5rem;
   position: relative;
   top: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+}
+
+.image {
+  padding: 1rem;
+}
+
+.links {
+  color: beige;
+  text-decoration: none;
+  padding: 1rem;
+}
+
+.active {
+  background-color: rgba(9, 9, 121, 0.358);
+  border-radius: 10px;
 }
 
 .title {
   color: beige;
   text-decoration: none;
+  padding: 1rem;
 }
