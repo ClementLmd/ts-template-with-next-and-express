@@ -9,12 +9,12 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
 export const createUser = createAsyncThunk(
   'users/createUser',
   async (newUser: { firstname: string; lastname: string }) => {
-    const response = await fetch('/api/users', {
+    const response = await fetch('http://localhost:3001/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newUser),
     });
-    const data = await response.json();
-    return data;
+    const savedUser = await response.json();
+    return savedUser;
   },
 );

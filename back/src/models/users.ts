@@ -1,9 +1,5 @@
 import mongoose from 'mongoose';
-
-export interface User {
-  firstname: string;
-  lastname: string;
-}
+import { User } from '@shared/types/user';
 
 const userSchema = new mongoose.Schema<User>({
   firstname: { type: String, required: true },

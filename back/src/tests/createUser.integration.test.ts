@@ -27,7 +27,7 @@ describe('UserModel test', () => {
     expect(savedUser.lastname).toBe(user.lastname);
   });
 
-  it('should send 201 ', async () => {
+  it('should send 201 when creating new user', async () => {
     const user = { firstname: 'John', lastname: 'Doe' };
     const response = await request(app).post('/users').send(user);
 
