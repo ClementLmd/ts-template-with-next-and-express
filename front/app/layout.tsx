@@ -1,5 +1,4 @@
 'use client';
-import type { Metadata } from 'next';
 import '../styles/globals.css';
 import HeaderLayout from '../components/HeaderLayout';
 import FooterLayout from '../components/FooterLayout';
