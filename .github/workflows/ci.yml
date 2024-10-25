@@ -1,0 +1,51 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Typecheck
+        run: |
+          pnpm --filter front typecheck
+          pnpm --filter back typecheck
+
+      - name: Lint
+        run: |
+          pnpm --filter front lint
+          pnpm --filter back lint
+
+      - name: Run tests
+        env:
+          NODE_ENV: test
+        run: |
+          pnpm --filter front test
+          pnpm --filter back test
+
+      - name: Build
+        run: |
+          pnpm --filter front build
+          pnpm --filter back build
