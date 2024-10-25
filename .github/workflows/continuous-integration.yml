@@ -1,0 +1,76 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: 
+      - main
+      - 'release/*'
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+      - name: Install front-end dependencies
+        run: npm install --prefix front
+      - name: Install back-end dependencies
+        run: npm install --prefix back
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Run ESLint for front-end
+        run: npm run lint --prefix front
+      - name: Run ESLint for back-end
+        run: npm run lint --prefix back
+
+  test:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Run front-end tests
+        run: npm run test --prefix front
+      - name: Run back-end tests
+        run: npm run test --prefix back
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [install, lint, test]
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Build front-end
+        run: npm run build --prefix front
+      - name: Build back-end
+        run: npm run build --prefix back
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [install, lint, test, build]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy Application
+        run: |
+          echo "Deployment logic here"
