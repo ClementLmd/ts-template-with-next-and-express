@@ -1,26 +1,26 @@
-name: CI Pipeline
+name: CI
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'pnpm'
+          node-version: 18
+          cache: pnpm
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -28,24 +28,26 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: |
-          pnpm --filter front typecheck
-          pnpm --filter back typecheck
+      - name: Lint back-end code
+        run: pnpm lint
+        working-directory: ./back
 
-      - name: Lint
-        run: |
-          pnpm --filter front lint
-          pnpm --filter back lint
+      - name: Lint front-end code
+        run: pnpm lint
+        working-directory: ./front
 
-      - name: Run tests
-        env:
-          NODE_ENV: test
-        run: |
-          pnpm --filter front test
-          pnpm --filter back test
+      - name: Run type checks for back-end
+        run: pnpm typecheck
+        working-directory: ./back
 
-      - name: Build
-        run: |
-          pnpm --filter front build
-          pnpm --filter back build
+      - name: Run type checks for front-end
+        run: pnpm typecheck
+        working-directory: ./front
+
+      - name: Run back-end tests
+        run: pnpm test
+        working-directory: ./back
+
+      - name: Run front-end tests
+        run: pnpm test
+        working-directory: ./front
