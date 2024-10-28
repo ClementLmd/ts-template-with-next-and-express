@@ -1,10 +1,11 @@
 'use client';
 // Route: /database/post
 import { useState } from 'react';
-import { Input } from '../../../components/Input';
 import { createUser } from '../../../features/user/user.thunks';
 import { useAppDispatch } from '../../../hooks/hooks';
 import styles from './databasePostPage.module.css';
+import { Input } from '../../../components/ui/input';
+import { Button } from '../../../components/ui/button';
 
 export default function DatabasePostPage() {
   const dispatch = useAppDispatch();
@@ -18,21 +19,22 @@ export default function DatabasePostPage() {
 
   return (
     <main className={styles.main}>
-      <h1>Hello, Post Page!</h1>
       <div>
         <div>Save a new user in database</div>
-        <form onSubmit={handleSubmitNewUser}>
+        <form onSubmit={handleSubmitNewUser} className="flex-col items-center justify-between">
           <Input
-            name="Firstname new user"
+            name="firstname"
             placeholder="User's firstname"
             onChange={(e) => setUserFirstname(e.target.value)}
           />
           <Input
-            name="Lastname new user"
+            name="lastname"
             placeholder="User's lastname"
             onChange={(e) => setUserLastname(e.target.value)}
           />
-          <button type="submit">Submit</button>
+          <Button type="submit" className=" m-2">
+            Submit
+          </Button>
         </form>
       </div>
     </main>

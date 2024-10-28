@@ -1,7 +1,7 @@
 'use client';
 import '../styles/globals.css';
-import HeaderLayout from '../components/HeaderLayout';
-import FooterLayout from '../components/FooterLayout';
+import HeaderLayout from '../components/header/HeaderLayout';
+import FooterLayout from '../components/footer/FooterLayout';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 

@@ -1,13 +1,17 @@
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { isMenuItemActive } from '../utils/isMenuItemActive';
-import { routes } from '../app/config/routes';
+import { isMenuItemActive } from '../../utils/isMenuItemActive';
+import { routes } from '../../app/config/routes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './mobileNavBar.module.css';
 import { useEffect, useState } from 'react';
 
-export default function MobileNavBar() {
+type IconButtonProps = {
+  icon?: typeof faBars;
+};
+
+export default function MobileNavBar({ icon = faBars }: IconButtonProps) {
   const pathname = usePathname();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -75,7 +79,7 @@ export default function MobileNavBar() {
           </li>
         </ul>
       </div>
-      <FontAwesomeIcon icon={faBars} className={styles.burger} onClick={openMenu} />
+      <FontAwesomeIcon icon={icon} className={styles.burger} onClick={openMenu} />
     </div>
   );
 }
