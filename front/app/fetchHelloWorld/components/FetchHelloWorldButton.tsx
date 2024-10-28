@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import styles from './fetchHelloWorldButton.module.css';
+import { Button } from '../../../components/ui/button';
 
 export default function FetchHelloWorldButton() {
   const [displayHelloWorld, setDisplayHelloWorld] = useState(false);
@@ -12,9 +13,9 @@ export default function FetchHelloWorldButton() {
 
   return (
     <div className={styles.body}>
-      <button className={styles.button} onClick={handleClick}>
+      <Button className={styles.button} onClick={handleClick}>
         Display Hello World !
-      </button>
+      </Button>
       {displayHelloWorld && <div>Hello World !</div>}
     </div>
   );

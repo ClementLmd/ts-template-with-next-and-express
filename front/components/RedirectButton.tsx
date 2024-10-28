@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { RoutePaths } from '../app/config/routes';
 import styles from './redirectButton.module.css';
+import { Button } from './ui/button';
 
 export default function RedirectButton({
   route,
@@ -10,10 +11,10 @@ export default function RedirectButton({
   buttonName: string;
 }) {
   return (
-    <button className={styles.button} type="button">
+    <Button className={`${styles.Button} m-2`} type="button">
       <Link href={`${route}`} className={styles.link}>
         {buttonName}
       </Link>
-    </button>
+    </Button>
   );
 }

@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { isMenuItemActive } from '../utils/isMenuItemActive';
+import { isMenuItemActive } from '../../utils/isMenuItemActive';
 import styles from './desktopNavBar.module.css';
 import { usePathname } from 'next/navigation';
-import { routes } from '../app/config/routes';
+import { routes } from '../../app/config/routes';
 
 export default function DesktopNavBar() {
   const pathname = usePathname();

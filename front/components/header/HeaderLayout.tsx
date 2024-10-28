@@ -1,16 +1,28 @@
 import Link from 'next/link';
 import styles from './headerLayout.module.css';
 import Image from 'next/image';
-import { routes } from '../app/config/routes';
+import { routes } from '../../app/config/routes';
 import DesktopNavBar from './DesktopNavBar';
 import MobileNavBar from './MobileNavBar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function HeaderLayout() {
-  const [hasAccessToWindow, setHasAccessToWindow] = useState<boolean>(false);
-  if (typeof window !== 'undefined') {
-    setHasAccessToWindow(true);
-  }
+  const [isBrowser, setIsBrowser] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsBrowser(true);
+
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 865);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className={styles.body}>
       <div id="headerLogo">
@@ -25,9 +37,7 @@ export default function HeaderLayout() {
           />
         </Link>
       </div>
-      <div id="headerLinks">
-        {hasAccessToWindow && window.innerWidth > 865 ? <DesktopNavBar /> : <MobileNavBar />}
-      </div>
+      <div id="headerLinks">{isBrowser && (isDesktop ? <DesktopNavBar /> : <MobileNavBar />)} </div>
       <div className={styles.login}>Connexion</div>
     </div>
   );
