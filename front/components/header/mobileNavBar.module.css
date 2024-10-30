@@ -1,5 +1,4 @@
 .title {
-  color: beige;
   text-decoration: none;
   padding: 0.5rem 1rem;
   display: block;
@@ -10,13 +9,13 @@
 }
 
 .menuItems ul {
+  @apply bg-dune-deepBlue;
   display: none;
   flex-direction: column;
   position: absolute;
   z-index: 1000;
   top: 5rem;
   left: 0;
-  background-color: rgba(9, 9, 121, 0.4);
   text-align: end;
   width: 100%;
   box-sizing: border-box;
@@ -44,7 +43,7 @@
 }
 
 .activeItem {
-  background-color: rgba(9, 9, 121, 0.358);
+  @apply bg-dune-copper;
   border-radius: 8px;
   padding: 1rem;
   width: calc(100% - 2rem);

@@ -1,10 +1,5 @@
 .body {
-  background: linear-gradient(
-    90deg,
-    rgba(111, 45, 159, 1) 0%,
-    rgba(9, 9, 121, 0.413624824929972) 73%,
-    rgba(88, 80, 223, 1) 100%
-  );
+  @apply bg-dune-deepBlue text-dune-offWhite;
   width: 100%;
   height: 4rem;
   position: relative;
