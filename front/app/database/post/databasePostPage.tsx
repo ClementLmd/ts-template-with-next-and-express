@@ -21,20 +21,20 @@ export default function DatabasePostPage() {
     <main className={styles.main}>
       <div>
         <div>Save a new user in database</div>
-        <form onSubmit={handleSubmitNewUser} className="flex-col items-center justify-between">
+        <form onSubmit={handleSubmitNewUser} className="flex-col items-center justify-between my-2">
           <Input
             name="firstname"
             placeholder="User's firstname"
             onChange={(e) => setUserFirstname(e.target.value)}
+            className="my-2"
           />
           <Input
             name="lastname"
             placeholder="User's lastname"
             onChange={(e) => setUserLastname(e.target.value)}
+            className="my-2"
           />
-          <Button type="submit" className=" m-2">
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </form>
       </div>
     </main>
