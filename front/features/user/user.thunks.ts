@@ -14,6 +14,9 @@ export const createUser = createAsyncThunk(
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newUser),
     });
+    if (response.status !== 201) {
+      throw new Error(`Error ${response.status}: ${await response.text()}`);
+    }
     const savedUser = await response.json();
     return savedUser;
   },
