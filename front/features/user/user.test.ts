@@ -38,6 +38,7 @@ describe('User slice', () => {
 
     const mockFetch = jest.spyOn(global, 'fetch').mockResolvedValue({
       json: async () => newUser,
+      status: 201,
     } as Response);
 
     const store = createTestStore();
@@ -55,6 +56,23 @@ describe('User slice', () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newUser),
     });
+
+    mockFetch.mockRestore();
+  });
+  it('should not dispatch if status 400 is received', async () => {
+    const emptyUser: User = { lastname: '', firstname: 'John' };
+
+    const mockFetch = jest.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false,
+      status: 400,
+      json: async () => ({ error: 'Missing or empty fields' }),
+    } as Response);
+
+    const store = createTestStore();
+    await store.dispatch(createUser(emptyUser));
+
+    const users = selectUsers(store.getState());
+    expect(users).toEqual([]);
 
     mockFetch.mockRestore();
   });
